@@ -4,6 +4,18 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 5000;
 
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://dantist1122:erjovo7016%21@firstproject-ljbx2.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
+
+
+
+
 app.use((req, res, next) => {
     // eslint-disable-line consistent-return
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,30 +34,42 @@ app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(bodyParser.json()); // support json encoded bodies
 
 app.get('/', (req, res) => {
-        console.log(req, res);
-        res.status(200).json({ name: 'Alice main one' })
+        res.status(200).json({ name: 'Alice main one  next try' })
     }
 );
-let i = 0;
-const users = ['One', 'Two'];
+
+let users = [
+    {id:1, name: 'Alice'},
+    {id:2, name: "Bob"},
+    {id: 3, name : 'John'}
+    ];
+
 app.get('/hi', (req, res) => {
-        res.status(200).json({ name: "hi Alice", age : 29, height: 170 })
+        res.status(200).json({users: users})
     }
 );
+
 app.post('/hi', (req, res) => {
-        res.status(200).json({ users: users, m: 'post'})
+        const user = req.body;
+        users.push(user);
+        res.status(200).json({ users: users, m: 'POST'})
     }
 );
+
 app.put('/hi', (req, res) => {
-        res.status(200).json({ users: users, m: 'put'})
+        res.status(200).json({ users: users, m: 'PUT'})
     }
 );
+
 app.patch('/hi', (req, res) => {
-        res.status(200).json({ users: users, m: 'patch'})
+        res.status(200).json({ users: users, m: 'PATCH'})
     }
 );
+
 app.delete('/hi', (req, res) => {
-        res.status(200).json({ users: users, m: 'delete'})
+        const id = req.body.id;
+        users = users.filter(el => el.id !== id);
+        res.status(200).json({ users: users, m: 'DELETE'})
     }
 );
 
@@ -56,5 +80,7 @@ app.post('/', (req, res) => {
     )
 });
 
+app.listen(PORT, () => console.log('SERVER WORKS'));
 
-app.listen(PORT, () => console.log('SERVER WORKS3343243'));
+
+
