@@ -1,20 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongoConnection = require('./db').mongoConnection;
+const bookSchema = require('./bookModel');
+const mongoose = require('mongoose');
 const app = express();
 const PORT = 5000;
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://dantist1122:erjovo7016%21@firstproject-ljbx2.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
-
-
-
+mongoConnection();
 
 app.use((req, res, next) => {
     // eslint-disable-line consistent-return
@@ -45,16 +37,38 @@ let users = [
     ];
 
 app.get('/hi', (req, res) => {
-        res.status(200).json({users: users})
+
+        bookSchema
+            .find()
+            .exec()
+            .then(docs => {
+                res.status(200).json(docs)
+            }).catch(err => {
+            res.status(400).json('ERROR', err)
+        })
+
     }
 );
 
 app.post('/hi', (req, res) => {
-        const user = req.body;
-        users.push(user);
-        res.status(200).json({ users: users, m: 'POST'})
+        const book = new bookSchema({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name
+        });
+
+        book
+            .save()
+            .then(() => {
+                res.status(201).json('OK');
+            })
+            .catch(err => {
+                res.status(500).json('ERR');
+            });
     }
 );
+
+
+
 
 app.put('/hi', (req, res) => {
         res.status(200).json({ users: users, m: 'PUT'})
