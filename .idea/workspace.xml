@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ffa8f56-23d2-4254-905d-647e53d52f8d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bookModel.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README1" beforeDir="false" afterPath="$PROJECT_DIR$/README1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-    </list>
+    <list default="true" id="5ffa8f56-23d2-4254-905d-647e53d52f8d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -215,12 +209,12 @@
       <workItem from="1548731176995" duration="2187000" />
       <workItem from="1548733827726" duration="12544000" />
       <workItem from="1549222129527" duration="15930000" />
-      <workItem from="1549511265322" duration="608000" />
+      <workItem from="1549511265322" duration="1100000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50258000" />
+    <option name="totallyTimeSpent" value="50750000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
